@@ -1,26 +1,57 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Post-form/>
+    <TheHeader posts="posts"></TheHeader>
+  </div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import PostForm from '@/components/PostForm'
+import TheHeader from '@/components/TheHeader'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    PostForm,
+    TheHeader
+  },
+  data: function () {
+    return {
+      posts: [
+        {
+          id: 1,
+          title: 'JavaScript',
+          body: 'Описание поста'
+        },
+        {
+          id: 2,
+          title: 'JavaScript 2',
+          body: 'Описание поста'
+        },
+        {
+          id: 3,
+          title: 'JavaScript 3',
+          body: 'Описание поста'
+        }
+      ],
+      title: '  ',
+      body: ' '
+    }
+  },
+  methods: {
+    createPost () {
+      const newPost = {
+        id: Date.now(),
+        title: this.title,
+        body: this.body
+      }
+      this.posts.push(newPost)
+      this.body = ' '
+      this.title = ' '
+    }
+
   }
 }
-</script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+</script>
